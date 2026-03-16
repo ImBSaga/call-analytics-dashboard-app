@@ -33,7 +33,7 @@ export default function CostAnalytics({ analytics }: CostAnalyticsProps) {
   return (
     <Card className="col-span-1 border-none shadow-md bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
       <CardHeader>
-        <CardTitle>Top 10 Cities by Total Cost ($)</CardTitle>
+        <CardTitle>Top 10 Cities by Total Cost (£)</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="h-[300px] w-full">

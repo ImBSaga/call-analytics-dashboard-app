@@ -1,4 +1,10 @@
-import { Phone, DollarSign, Clock, CheckCircle, XCircle } from "lucide-react";
+import {
+  Phone,
+  Clock,
+  CheckCircle,
+  XCircle,
+  PoundSterlingIcon,
+} from "lucide-react";
 
 export const KPI_CONFIG = [
   {
@@ -10,7 +16,7 @@ export const KPI_CONFIG = [
   {
     key: "totalCost",
     title: "Total Cost",
-    icon: DollarSign,
+    icon: PoundSterlingIcon,
     color: "text-green-500",
     isCurrency: true,
   },
@@ -35,6 +41,12 @@ export const KPI_CONFIG = [
   },
 ] as const;
 
-export const CHART_COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"] as const;
+export const CHART_COLORS = [
+  "#3b82f6",
+  "#10b981",
+  "#f59e0b",
+  "#ef4444",
+  "#8b5cf6",
+] as const;
 
 export const TABLE_PAGE_SIZE = 20;

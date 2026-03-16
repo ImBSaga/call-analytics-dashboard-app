@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CallAnalytics } from "@/types/CallRecord.type";
 import {
   BarChart,
@@ -15,13 +10,21 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Cell,
+  Rectangle,
 } from "recharts";
 import { CHART_COLORS } from "@/constants/statsData";
 
 interface DurationAnalyticsProps {
   analytics: CallAnalytics;
 }
+
+// Custom shape to replace deprecated Cell component
+const CustomBar = (props: any) => {
+  const { index } = props;
+  return (
+    <Rectangle {...props} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+  );
+};
 
 export default function DurationAnalytics({
   analytics,
@@ -56,17 +59,17 @@ export default function DurationAnalytics({
                 stroke="currentColor"
                 className="text-slate-200 dark:text-slate-800"
               />
-              <XAxis 
-                dataKey="name" 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: 'currentColor' }}
+              <XAxis
+                dataKey="name"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "currentColor" }}
                 className="text-slate-500 dark:text-slate-400 text-xs"
               />
-              <YAxis 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: 'currentColor' }}
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "currentColor" }}
                 className="text-slate-500 dark:text-slate-400 text-xs"
               />
               <Tooltip
@@ -78,15 +81,16 @@ export default function DurationAnalytics({
                   backgroundColor: "var(--background)",
                   color: "var(--foreground)",
                 }}
+                itemStyle={{
+                  color: "var(--foreground)",
+                }}
               />
-              <Bar dataKey="duration" radius={[4, 4, 0, 0]} barSize={60}>
-                {data.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={CHART_COLORS[index % CHART_COLORS.length]}
-                  />
-                ))}
-              </Bar>
+              <Bar
+                dataKey="duration"
+                radius={[6, 6, 0, 0]}
+                barSize={60}
+                shape={<CustomBar />}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>

@@ -81,7 +81,7 @@ export default function CallLogsTable({ data }: CallLogsTableProps) {
                   <TableCell>{record.receiverNumber}</TableCell>
                   <TableCell>{record.city}</TableCell>
                   <TableCell>{record.callDuration}s</TableCell>
-                  <TableCell>${parseFloat(record.callCost).toFixed(2)}</TableCell>
+                  <TableCell>£{parseFloat(record.callCost).toFixed(2)}</TableCell>
                   <TableCell>
                     <Badge 
                       variant={record.callStatus ? "default" : "destructive"} 

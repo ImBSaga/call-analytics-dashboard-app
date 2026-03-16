@@ -18,7 +18,7 @@ export default function KPIStats({ analytics }: KPIStatsProps) {
 
         let displayValue: string;
         if ("isCurrency" in config && config.isCurrency) {
-          displayValue = `$${numValue.toLocaleString(undefined, {
+          displayValue = `£${numValue.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}`;

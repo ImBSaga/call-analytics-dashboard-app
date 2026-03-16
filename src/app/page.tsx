@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useCallRecords } from "@/hooks/useCallRecords";
 import KPIStats from "./partials/KPIStats";
 import DurationAnalytics from "./partials/DurationAnalytics";
@@ -17,6 +18,11 @@ import {
 
 export default function Home() {
   const { data, analytics, loading, error } = useCallRecords();
+  const [lastUpdated, setLastUpdated] = useState<string>("");
+
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleTimeString());
+  }, [loading]);
 
   if (error) {
     return (
@@ -37,9 +43,11 @@ export default function Home() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden sm:block text-sm text-muted-foreground bg-white/80 dark:bg-slate-800/80 px-4 py-2 rounded-full shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-sm">
-            Last updated: {new Date().toLocaleTimeString()}
-          </div>
+          {lastUpdated && (
+            <div className="hidden sm:block text-sm text-muted-foreground bg-white/80 dark:bg-slate-800/80 px-4 py-2 rounded-full shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-sm">
+              Last updated: {lastUpdated}
+            </div>
+          )}
           <ThemeToggle />
         </div>
       </FadeIn>
