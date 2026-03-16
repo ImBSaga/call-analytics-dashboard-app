@@ -2,15 +2,11 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* ---------------------------------------- */
+/* shadcn theme */
+/* ---------------------------------------- */
+
 @custom-variant dark (&:is(.dark *));
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  @apply bg-white text-black;
-}
 
 :root {
   --background: oklch(1 0 0);
@@ -133,4 +129,16 @@ body {
   html {
     @apply font-sans;
   }
+}
+
+/* ---------------------------------------- */
+/* end of shadcn theme */
+/* ---------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-black;
 }
