@@ -4,7 +4,12 @@ A premium, modern SaaS-style dashboard for monitoring and analyzing Telecommunic
 
 🔗 **Live Demo**: [https://call-analytics-dashboard-app.vercel.app](https://call-analytics-dashboard-app.vercel.app)
 
-![Dashboard Preview](./public/images/github-preview-images.png)
+<div align="center">
+  <img src="./public/images/github-preview-images-1.png" width="49%" />
+  <img src="./public/images/github-preview-images-2.png" width="49%" />
+  <img src="./public/images/github-preview-images-3.png" width="49%" />
+  <img src="./public/images/github-preview-images-4.png" width="49%" />
+</div>
 
 ## 🚀 Key Features
 
@@ -23,16 +28,16 @@ A premium, modern SaaS-style dashboard for monitoring and analyzing Telecommunic
 
 ## 🛠️ Technology Stack
 
-| Role | Technology |
-| :--- | :--- |
-| **Framework** | [Next.js 15+](https://nextjs.org/) (App Router) |
+| Role              | Technology                                      |
+| :---------------- | :---------------------------------------------- |
+| **Framework**     | [Next.js 15+](https://nextjs.org/) (App Router) |
 | **Data Fetching** | [Tanstack Query v5](https://tanstack.com/query) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) |
-| **UI Components** | [shadcn/ui](https://ui.shadcn.com/) |
-| **Charts** | [Recharts](https://recharts.org/) |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/) |
-| **API Client** | [Axios](https://axios-http.com/) |
-| **Type Safety** | [TypeScript](https://www.typescriptlang.org/) |
+| **Styling**       | [Tailwind CSS v4](https://tailwindcss.com/)     |
+| **UI Components** | [shadcn/ui](https://ui.shadcn.com/)             |
+| **Charts**        | [Recharts](https://recharts.org/)               |
+| **Animations**    | [Framer Motion](https://www.framer.com/motion/) |
+| **API Client**    | [Axios](https://axios-http.com/)                |
+| **Type Safety**   | [TypeScript](https://www.typescriptlang.org/)   |
 
 ## 📂 Project Structure
 
@@ -66,10 +71,12 @@ src/
 ## 🛠️ Getting Started
 
 ### 1. Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm / pnpm / yarn
 
 ### 2. Installation
+
 ```bash
 git clone https://github.com/your-username/call-analytics-dashboard.git
 cd call-analytics-dashboard
@@ -77,12 +84,15 @@ npm install
 ```
 
 ### 3. Environment Variables
+
 Create a `.env.local` file in the root:
+
 ```env
 NEXT_PUBLIC_API_URL=https://your-api-endpoint.com/v1
 ```
 
 ### 4. Run Locally
+
 ```bash
 npm run dev
 ```
@@ -90,4 +100,5 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ---
+
 Built with ❤️ for performance and aesthetics.
