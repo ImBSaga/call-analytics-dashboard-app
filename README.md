@@ -2,7 +2,9 @@
 
 A premium, modern SaaS-style dashboard for monitoring and analyzing Telecommunication Call Data Records (CDR). Built with **Next.js 15**, **Tanstack Query**, and **shadcn/ui**, featuring a high-performance architecture and stunning dark mode aesthetics.
 
-![Dashboard Preview](https://via.placeholder.com/1200x600?text=Call+Analytics+Dashboard+Preview)
+🔗 **Live Demo**: [https://call-analytics-dashboard-app.vercel.app](https://call-analytics-dashboard-app.vercel.app)
+
+![Dashboard Preview](./public/images/github-preview-images.png)
 
 ## 🚀 Key Features
 
