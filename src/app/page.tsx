@@ -10,6 +10,7 @@ import CityAnalytics from "./partials/CityAnalytics";
 import CallLogsTable from "./partials/CallLogsTable";
 import { Skeleton } from "@/components/ui/skeleton";
 import ThemeToggle from "@/components/container/ThemeToggle";
+import ErrorScreen from "@/components/container/ErrorScreen";
 import { 
   FadeIn, 
   StaggerContainer, 
@@ -17,7 +18,7 @@ import {
 } from "@/components/animations/MotionWrapper";
 
 export default function Home() {
-  const { data, analytics, loading, error } = useCallRecords();
+  const { data, analytics, loading, error, refetch } = useCallRecords();
   const [lastUpdated, setLastUpdated] = useState<string>("");
 
   useEffect(() => {
@@ -25,11 +26,7 @@ export default function Home() {
   }, [loading]);
 
   if (error) {
-    return (
-      <div className="flex h-screen items-center justify-center text-red-500 font-bold">
-        Error: {error}
-      </div>
-    );
+    return <ErrorScreen message={error} onRetry={() => refetch()} />;
   }
 
   return (

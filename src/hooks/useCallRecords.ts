@@ -5,7 +5,7 @@ import { format, parseISO } from "date-fns";
 import { useMemo } from "react";
 
 export function useCallRecords() {
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["call-records"],
     queryFn: getCallRecords,
   });
@@ -81,5 +81,6 @@ export function useCallRecords() {
     analytics,
     loading: isLoading,
     error: isError ? (error as Error).message : null,
+    refetch,
   };
 }
