@@ -1,41 +1,51 @@
-const mongoose = require('mongoose');
-
-// Mongoose connection options for stability
-const options = {
-  autoIndex: true, // Build indexes (disable in high-throughput production)
-  connectTimeoutMS: 10000, // Give up after 10s
-  socketTimeoutMS: 45000,  // Close sockets after 45s of inactivity
-};
+const mongoose = require("mongoose");
 
 /**
- * Robust database connector.
- * Handles connection pooling and prevents double-connecting in serverless environments.
+ * Robust Database Connection Utility for Serverless (Vercel)
+ * Manages connection pooling and provides high timeouts for cloud handshakes.
  */
-async function connectDB() {
-  if (mongoose.connection.readyState >= 1) {
-    return mongoose.connection;
+
+let cachedConnection = null;
+
+const connectDB = async () => {
+  // If we already have a connection, reuse it (crucial for Vercel cold starts)
+  if (cachedConnection && mongoose.connection.readyState === 1) {
+    return cachedConnection;
   }
 
-  const MONGODB_URI = process.env.MONGODB_URI;
-  if (!MONGODB_URI) {
-    console.error('❌ MONGODB_URI is not defined in environment variables');
-    throw new Error('Database connection URI missing');
+  const uri = process.env.MONGODB_URI;
+
+  if (!uri) {
+    throw new Error("MONGODB_URI is not defined in environment variables");
   }
+
+  const options = {
+    // High timeouts for slow Atlas Free Tier handshakes
+    connectTimeoutMS: 60000,
+    socketTimeoutMS: 60000,
+    serverSelectionTimeoutMS: 60000,
+    // Optimize for serverless: small pool to avoid hitting Atlas M0 limits
+    maxPoolSize: 2,
+    minPoolSize: 1,
+    // Keep connection alive
+    heartbeatFrequencyMS: 10000,
+  };
 
   try {
-    console.log('⏳ Connecting to MongoDB Cloud...');
-    const conn = await mongoose.connect(MONGODB_URI, options);
-    console.log(`📦 Connected to MongoDB: ${conn.connection.host}`);
-    return conn;
+    console.log("⏳ Attempting Cloud MongoDB Connection...");
+
+    // Create new connection if none exists
+    cachedConnection = await mongoose.connect(uri, options);
+
+    console.log("📦 Connected to MongoDB Cloud:", mongoose.connection.host);
+    return cachedConnection;
   } catch (err) {
-    console.error(`❌ MongoDB connection error: ${err.message}`);
-    // Don't exit process in serverless (let Vercel handle it), 
-    // but in local dev we might want to know.
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn('⚠️  Falling back to local if possible (not implemented, but API will still run)');
-    }
+    console.error("❌ MongoDB connection error:", err.message);
+
+    // Clear cache so next attempt tries fresh
+    cachedConnection = null;
     throw err;
   }
-}
+};
 
 module.exports = connectDB;
