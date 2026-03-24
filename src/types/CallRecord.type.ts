@@ -25,3 +25,27 @@ export type CallAnalytics = {
   callsByHour: Record<number, number>;
   callsByDay: Record<string, number>;
 };
+
+export type CDRFilters = {
+  page?: number;
+  limit?: number;
+  startDate?: string;
+  endDate?: string;
+  caller?: string;
+  receiver?: string;
+  city?: string;
+  direction?: "inbound" | "outbound" | "";
+  status?: "success" | "failed" | "";
+};
+
+export type PaginatedCDR = {
+  data: CallRecord[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+  };
+};

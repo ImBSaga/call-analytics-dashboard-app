@@ -1,6 +1,6 @@
-# 📊 Call Analytics Dashboard
+# 📊 Call Analytics Dashboard (Full-Stack)
 
-A premium, modern SaaS-style dashboard for monitoring and analyzing Telecommunication Call Data Records (CDR). Built with **Next.js 15**, **Tanstack Query**, and **shadcn/ui**, featuring a high-performance architecture and stunning dark mode aesthetics.
+A premium, modern SaaS-style dashboard for monitoring and analyzing Telecommunication Call Data Records (CDR). This is a **full-stack** application featuring a **Next.js 15** frontend, an **Express.js** backend, and a **MongoDB Atlas** cloud database.
 
 🔗 **Live Demo**: [https://call-analytics-dashboard-app.vercel.app](https://call-analytics-dashboard-app.vercel.app)
 
@@ -13,92 +13,75 @@ A premium, modern SaaS-style dashboard for monitoring and analyzing Telecommunic
 
 ## 🚀 Key Features
 
-- **Real-time KPI Monitoring**: Track Total Calls, Costs, Average Duration, and Success/Failure rates at a glance.
-- **Interactive Analytics**:
-  - **Call Duration Insights**: Identify shortest, average, and longest call patterns.
-  - **Geographic breakdown**: Top 5 cities by call volume and top 10 by cost.
-  - **Activity Timeline**: Visual hourly activity tracking to identify peak hours.
-- **Premium User Experience**:
-  - 🌙 **Dark/Light Mode**: Seamless theme switching with adaptive chart colors.
-  - ✨ **Micro-animations**: Smooth entry effects using Framer Motion.
-  - ⚡ **Skeleton Loading**: Graceful loading states for a polished feel.
-- **Advanced Data Table**:
-  - paginated recent call logs limited to 20 records per page.
-  - Data-aware status badges and formatted timestamps.
+- **Full-Stack Integration**: Real-time data synchronization between the Express backend and Next.js frontend.
+- **Role-Based Access Control (RBAC)**:
+  - 👤 **Analyst**: View-only access to analytics and call logs.
+  - 🛡️ **Admin**: Full CRUD permissions (Create, Edit, Delete call records).
+- **MongoDB Atlas Cloud**: Persistent data storage with automated seeding from `mock-cdr.csv`.
+- **Real-time KPI Monitoring**: Track Total Calls, Costs, Average Duration, and Success/Failure rates.
+- **Interactive Analytics**: Duration insights, Geographic breakdowns, and Activity Timelines.
+- **Premium UX**: Secure JWT Authentication, Framer Motion animations, and adaptive Dark/Light mode.
 
 ## 🛠️ Technology Stack
 
-| Role              | Technology                                      |
-| :---------------- | :---------------------------------------------- |
-| **Framework**     | [Next.js 15+](https://nextjs.org/) (App Router) |
-| **Data Fetching** | [Tanstack Query v5](https://tanstack.com/query) |
-| **Styling**       | [Tailwind CSS v4](https://tailwindcss.com/)     |
-| **UI Components** | [shadcn/ui](https://ui.shadcn.com/)             |
-| **Charts**        | [Recharts](https://recharts.org/)               |
-| **Animations**    | [Framer Motion](https://www.framer.com/motion/) |
-| **API Client**    | [Axios](https://axios-http.com/)                |
-| **Type Safety**   | [TypeScript](https://www.typescriptlang.org/)   |
+| Component    | Technology                                                                                                                            |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| **Frontend** | [Next.js 15+](https://nextjs.org/), [Tanstack Query v5](https://tanstack.com/query), [Tailwind CSS v4](https://tailwindcss.com/)      |
+| **Backend**  | [Node.js](https://nodejs.org/), [Express.js](https://expressjs.com/), [Mongoose](https://mongoosejs.com/)                             |
+| **Database** | [MongoDB Atlas](https://www.mongodb.com/atlas) (Free Tier)                                                                            |
+| **Security** | [JWT](https://jwt.io/), [bcryptjs](https://www.npmjs.com/package/bcryptjs), [express-validator](https://express-validator.github.io/) |
+| **UI Kit**   | [shadcn/ui](https://ui.shadcn.com/), [Recharts](https://recharts.org/), [Framer Motion](https://www.framer.com/motion/)               |
 
-## 📂 Project Structure
+## 📂 Repository Structure
 
-Following modern React architecture patterns:
+This is a monorepo containing both frontend and backend code:
 
 ```text
-src/
-├── app/                  # Next.js App Router (Pages & Layout)
-│   └── partials/        # Page-specific complex components (Analytics widgets)
-├── components/
-│   ├── ui/              # Shadcn primitive components
-│   ├── container/       # Global structural components (ThemeToggle)
-│   └── animations/      # Framer Motion reusable wrappers
-├── hooks/                # Custom React hooks (Tanstack Query logic)
-├── services/             # API service layer (Axios instances)
-├── types/                # TypeScript interfaces & types
-├── constants/            # Static data & configuration
-└── lib/                  # Shared utilities (cn, etc.)
+.
+├── backend/              # Node.js Express API
+│   ├── src/models/      # MongoDB Mongoose Schemas
+│   ├── src/services/    # Business logic & Seeding
+│   └── data/            # Source CSV for initial data
+├── src/                  # Next.js Frontend
+│   ├── app/             # App Router & Auth flows
+│   ├── services/        # Frontend API client (Axios)
+│   └── providers/       # Auth & Theme context
+└── README.md
 ```
-
-## 📏 Best Practices & Conventions
-
-- **Naming Conventions**:
-  - **Components**: `PascalCase.tsx` (e.g., `KPIStats.tsx`)
-  - **Hooks**: `camelCase.ts` (e.g., `useCallRecords.ts`)
-  - **Types**: `PascalCase.type.ts` (e.g., `CallRecord.type.ts`)
-  - **Page Partials**: `PascalCase.tsx` for consistency within the app directory.
-- **Centralized Data**: All static labels and configurations reside in `src/constants/statsData.ts` for easy maintenance.
-- **Responsive Design**: Mobile-first approach ensuring the dashboard looks great on all devices.
 
 ## 🛠️ Getting Started
 
 ### 1. Prerequisites
 
 - Node.js 18+
-- npm / pnpm / yarn
+- A [MongoDB Atlas](https://www.mongodb.com/atlas) account (Free tier)
 
-### 2. Installation
+### 2. Backend Setup
 
 ```bash
-git clone https://github.com/your-username/call-analytics-dashboard.git
-cd call-analytics-dashboard
+cd backend
 npm install
-```
-
-### 3. Environment Variables
-
-Create a `.env.local` file in the root:
-
-```env
-NEXT_PUBLIC_API_URL=https://your-api-endpoint.com/v1
-```
-
-### 4. Run Locally
-
-```bash
+# Create .env based on .env.example
+# Add your MONGODB_URI (Atlas Connection String)
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Frontend Setup
+
+```bash
+# In the root directory
+npm install
+# Ensure root .env.local points to http://localhost:3001/api
+npm run dev
+```
+
+## 🔐 Login Credentials (Demo)
+
+| Role        | Email               | Password     |
+| :---------- | :------------------ | :----------- |
+| **Admin**   | admin@pinevox.com   | Admin@1234   |
+| **Analyst** | analyst@pinevox.com | Analyst@1234 |
 
 ---
 
-Built with ❤️ for performance and aesthetics.
+Built with ❤️ for PineVox Telecom Intelligence.

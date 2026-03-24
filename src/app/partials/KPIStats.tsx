@@ -3,12 +3,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CallAnalytics } from "@/types/CallRecord.type";
 import { KPI_CONFIG } from "@/constants/statsData";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface KPIStatsProps {
   analytics: CallAnalytics;
+  isLoading?: boolean;
 }
 
-export default function KPIStats({ analytics }: KPIStatsProps) {
+export default function KPIStats({ analytics, isLoading }: KPIStatsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
       {KPI_CONFIG.map((config) => {
@@ -34,13 +36,17 @@ export default function KPIStats({ analytics }: KPIStatsProps) {
             className="overflow-hidden border-none shadow-md bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:shadow-lg transition-all"
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
                 {config.title}
               </CardTitle>
               <config.icon className={`h-4 w-4 ${config.color}`} />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{displayValue}</div>
+              {isLoading ? (
+                <Skeleton className="h-8 w-24 bg-slate-200 dark:bg-slate-800" />
+              ) : (
+                <div className="text-2xl font-black tracking-tight">{displayValue}</div>
+              )}
             </CardContent>
           </Card>
         );
